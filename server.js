@@ -49,6 +49,23 @@ app.get('/api/roles', (req, res) => {
     });
 });
 
+//get employee
+app.get('/api/employees', (req, res) => {
+    const sql = `SELECT * FROM employee`;
+    const params = [];
+    db.all(sql, params, (err, rows) => {
+        if(err) {
+            res.status(500).json({error: err.message});
+            return;
+        }
+
+        res.json({
+            message: 'success',
+            data: rows
+        });
+    });
+});
+
 //add (post) departments
 app.post('/api/department', ({ body }, res) => {
     const sql = `INSERT INTO departments (name)
@@ -73,6 +90,25 @@ app.post('/api/role', ({ body }, res) => {
     const sql = `INSERT INTO role (title, salary, department_id)
         VALUES (?,?,?)`;
     const params = [body.title, body.salary, body.department_id];
+    db.run(sql, params, function(err, result) {
+        if(err) {
+            res.status(400).json({ error: err.message });
+            return;
+        }
+
+        res.json({
+            message: 'success',
+            data: body, 
+            id: this.lastID
+        });
+    });
+});
+
+//add (post) employee
+app.post('/api/employee', ({ body }, res) => {
+    const sql = `INSERT INTO employee (first_name, last_name, role_id, manager_id)
+        VALUES (?,?,?, ?)`;
+    const params = [body.first_name, body.last_name, body.role_id, body.manager_id];
     db.run(sql, params, function(err, result) {
         if(err) {
             res.status(400).json({ error: err.message });
