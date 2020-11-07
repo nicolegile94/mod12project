@@ -32,11 +32,47 @@ app.get('/api/departments', (req, res) => {
     });
 });
 
+//get roles
+app.get('/api/roles', (req, res) => {
+    const sql = `SELECT * FROM role`;
+    const params = [];
+    db.all(sql, params, (err, rows) => {
+        if(err) {
+            res.status(500).json({error: err.message});
+            return;
+        }
+
+        res.json({
+            message: 'success',
+            data: rows
+        });
+    });
+});
+
 //add (post) departments
 app.post('/api/department', ({ body }, res) => {
     const sql = `INSERT INTO departments (name)
         VALUES (?)`;
     const params = [body.name];
+    db.run(sql, params, function(err, result) {
+        if(err) {
+            res.status(400).json({ error: err.message });
+            return;
+        }
+
+        res.json({
+            message: 'success',
+            data: body, 
+            id: this.lastID
+        });
+    });
+});
+
+//add (post) role
+app.post('/api/role', ({ body }, res) => {
+    const sql = `INSERT INTO role (title, salary, department_id)
+        VALUES (?,?,?)`;
+    const params = [body.title, body.salary, body.department_id];
     db.run(sql, params, function(err, result) {
         if(err) {
             res.status(400).json({ error: err.message });
