@@ -123,6 +123,25 @@ app.post('/api/employee', ({ body }, res) => {
     });
 });
 
+//edit (put) employee
+app.put('/api/employee/:id', (req, res) => {
+    const sql = `UPDATE employee SET role_id = ? WHERE id = ?`;
+    const params = [req.body.role_id, req.params.id];
+
+    db.run(sql, params, function(err, data) {
+        if(err) {
+            res.status(400).json({error: err.message});
+            return;
+        }
+
+        res.json({
+            message: 'success',
+            data: req.body,
+            changes: this.changes
+        });
+    });
+});
+
 //Default response
 app.use((req, res) => {
     res.status(404).end();
