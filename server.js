@@ -15,6 +15,7 @@ const db = new sqlite3.Database('./db/company.db', err => {
     console.log('Connected to the company database.');
 });
 
+//get departments
 app.get('/api/departments', (req, res) => {
     const sql = `SELECT * FROM departments`;
     const params = [];
@@ -27,6 +28,25 @@ app.get('/api/departments', (req, res) => {
         res.json({
             message: 'success',
             data: rows
+        });
+    });
+});
+
+//add (post) departments
+app.post('/api/department', ({ body }, res) => {
+    const sql = `INSERT INTO departments (name)
+        VALUES (?)`;
+    const params = [body.name];
+    db.run(sql, params, function(err, result) {
+        if(err) {
+            res.status(400).json({ error: err.message });
+            return;
+        }
+
+        res.json({
+            message: 'success',
+            data: body, 
+            id: this.lastID
         });
     });
 });
