@@ -1,0 +1,28 @@
+{
+  "name": "mod12project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "migrate": "sqlite3 db/company.db < db/schema.sql",
+    "seed": "sqlite3 db/company.db < db/seeds.sql",
+    "db": "sqlite3 db/company.db",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicolegile94/mod12project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nicolegile94/mod12project/issues"
+  },
+  "homepage": "https://github.com/nicolegile94/mod12project#readme",
+  "dependencies": {
+    "expresss": "0.0.0",
+    "sqlite3": "^5.0.0"
+  }
+}
