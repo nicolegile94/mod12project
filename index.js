@@ -1,5 +1,5 @@
 const { prompt } = require("inquirer");
-const db = require("./db");
+const db = require("./db/database");
 const cTable = require('console.table');
 
 //  and update an employee role
@@ -72,6 +72,7 @@ function mainMenu() {
 }
 
 function getDepartment() {
+
 
 }
 
