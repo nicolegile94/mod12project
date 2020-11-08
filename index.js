@@ -1,6 +1,7 @@
 const { prompt } = require("inquirer");
 const db = require("./db/database");
 const cTable = require('console.table');
+const router = require("./routes/departmentRoutes");
 
 //  and update an employee role
 
@@ -72,6 +73,10 @@ function mainMenu() {
 }
 
 function getDepartment() {
+    
+    console.table([
+        
+      ]);
 }
 
 function getRole() { 
