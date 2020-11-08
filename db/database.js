@@ -6,7 +6,7 @@ const db = new sqlite3.Database('./db/company.db', err => {
         return console.error(err.message);
     }
 
-    console.log('Connected to the company database.');
+   console.log('Connected to the company database.');
 });
 
 module.exports = db;

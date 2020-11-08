@@ -72,36 +72,27 @@ function mainMenu() {
 }
 
 function getDepartment() {
+}
 
-
+function getRole() { 
 }
 
 function getEmployee() {
-
-}
-
-function getRole() {
-
 }
 
 function postDepartment() {
-
 }
 
 function postRole() {
-
 }
 
 function postEmployee() {
-
 }
 
 function putEmployee() {
-
 }
 
 function quit() {
-
 }
 
 mainMenu();
